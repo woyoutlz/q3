@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <div id="app" style="margin: 0 auto;width: 500px">
+    <div id="q1" v-if="show=='q1'">
+      <h2>q1</h2>
+      <table>
+        <thead>
+          <tr>
+            <th data-bind="visible: question.hasRows"></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="way in ways">
+            <td>
+              <span>{{way.name}}</span>
+            </td>
+            <td>
+              <label style="margin: 0px; position: absolute;">
+                <input class="choose" type="checkbox" v-model="way.value">
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button style="margin: 10px" @click="sub_a1">确定</button>
+    </div>
+    <div v-if="show=='q2'">
+      <h2>q2</h2>
+      <p>选择决策顺序，可重复</p>
+      <p>
+        <button style="margin-right: 30px" v-for="way in ways" v-if="way.value==true" @click="choose_q2(way)">{{way.name}}</button>
+      </p>
+      <p>您选择的顺序{{a2}}</p>
+      <button style="margin: 10px" @click="sub_a2">确定</button>
+    </div>
+    <div v-if="show=='q3'">
+      <h2>q3</h2>
+      <p>您选择了{{a1.length}}个渠道,您访问的目的是:</p>
+      <table>
+        <thead>
+          <tr>
+            <td></td>
+            <td v-for="x in q3_values">{{x}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="value,name in q3">
+            <td>{{name}}</td>
+            <td>
+              <input class="choose" type="checkbox" v-model="value[0]">
+            </td>
+            <td>
+              <input class="choose" type="checkbox" v-model="value[1]">
+            </td>
+            <td>
+              <input class="choose" type="checkbox" v-model="value[2]">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button style="margin: 10px" @click="sub_a3">确定</button>
+    </div>
+    <div v-if="show=='q4'">
+      <h3>您选择的渠道是:{{a1_name}}</h3>
+      <h3>您选择的渠道顺序是:{{a2}}</h3>
+      <h3>您选择的使用原因是:</h3>
+      <p v-for="r,name in a3">
+        <span style="margin-right: 20px">{{name}}</span> <span>{{r}}</span>
+      </p>
+    </div>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
